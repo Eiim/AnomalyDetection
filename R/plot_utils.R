@@ -35,9 +35,9 @@ add_formatted_y <- function(yrange, y_log = FALSE, expand = TRUE, digits = 1) {
     transform = "identity"
   }
   
-  return (ggplot2(breaks=seq(ymin, ymax, length.out=6),
-                  limits=c(ymin, ymax), labels=function(x) paste(round(x/divisor, digits=digits),unit,sep=""),
-                  trans = transform))
+  return (ggplot(breaks=seq(ymin, ymax, length.out=6),
+                 limits=c(ymin, ymax), labels=function(x) paste(round(x/divisor, digits=digits),unit,sep=""),
+                 trans = transform))
   
 }
 
@@ -68,9 +68,9 @@ add_day_labels_datetime <- function(tsplot, breaks = 6, start = NULL, end = NULL
     minor_breaks <- as.POSIXct(c(start, minor_breaks))
   }
   
-  outplot <- tsplot + ggplot2(breaks = minor_breaks,
-                              labels = function(x) ifelse(as.POSIXlt(x, tz = "UTC")$hour != 0,strftime(x, format="%kh", tz="UTC"), strftime(x, format="%b %e", tz="UTC")), 
-                              expand = c(0, 0))
+  outplot <- tsplot + ggplot(breaks = minor_breaks,
+                             labels = function(x) ifelse(as.POSIXlt(x, tz = "UTC")$hour != 0,strftime(x, format="%kh", tz="UTC"), strftime(x, format="%b %e", tz="UTC")), 
+                             expand = c(0, 0))
   
   if (length(lines_at) > 0) {
     outplot <- outplot + ggplot2::geom_vline(xintercept = as.numeric(lines_at), color = "gray60")  
