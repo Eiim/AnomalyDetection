@@ -35,7 +35,9 @@ add_formatted_y <- function(yrange, y_log = FALSE, expand = TRUE, digits = 1) {
     transform = "identity"
   }
   
-  return (ggplot2::scale_y_continuous(breaks=seq(ymin, ymax, length.out=6), limits=c(ymin, ymax), labels=function(x) paste(round(x/divisor, digits=digits),unit,sep=""), trans = transform))
+  return (ggplot2(breaks=seq(ymin, ymax, length.out=6),
+                  limits=c(ymin, ymax), labels=function(x) paste(round(x/divisor, digits=digits),unit,sep=""),
+                  trans = transform))
   
 }
 
